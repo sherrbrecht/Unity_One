@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour {
          -1 = recule
          0 = le personnage ne bouge pas
          1 = avance
+
          */
 
         Vector3 _moveHorizontal = transform.right * _xMove;
