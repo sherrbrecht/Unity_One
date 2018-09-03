@@ -4,6 +4,7 @@
 public class PlayerMotor : MonoBehaviour
 {
     private Vector3 velocity;
+    private Vector3 rotation;
     private Rigidbody rb;
 
 
@@ -21,6 +22,7 @@ public class PlayerMotor : MonoBehaviour
     private void FixedUpdate()
     {
         PerformMovement();
+        PerformRotation();
     }
 
     private void PerformMovement()
@@ -30,5 +32,15 @@ public class PlayerMotor : MonoBehaviour
             rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
         }
     }
-    
+
+    public void Rotate(Vector3 _rotation)
+    {
+        rotation = _rotation;
+    }
+
+    private void PerformRotation()
+    {
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
+    }
+
 }

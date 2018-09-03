@@ -4,14 +4,17 @@
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour {
 
+    //inspector data input
     [SerializeField]
-    private float speed;
+    private float speed = 5f;
+    [SerializeField]
+    private float lookSensitivity = 3f; // sensibiité souris (du regard)
 
-    private PlayerMotor _motor;
+    private PlayerMotor motor;
 
     private void Start()
     {
-        _motor = GetComponent<PlayerMotor>();
+        motor = GetComponent<PlayerMotor>();
     }
 
     private void Update()
@@ -39,7 +42,17 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * speed;
 
-        _motor.Move(_velocity);
+        motor.Move(_velocity);
+
+        //On va calculer la rotation du joueur en un vecteur 3D
+
+        //Axe Horizontal
+        float _yRot = Input.GetAxisRaw("Mouse X");
+        Vector3 _rotation = new Vector3(0, _yRot, 0) * lookSensitivity;
+
+        motor.Rotate(_rotation);
+
+        
 
     }
 }
